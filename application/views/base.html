@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>CI Auth - Admin Site</title>
+		<link rel="stylesheet" type="text/css" href="//necolas.github.com/normalize.css/2.1.0/normalize.css" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<?php foreach($css_files as $file): ?>
+			<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+		<?php endforeach; ?>
+		<?php foreach($js_files as $file): ?>
+		    <script src="<?php echo $file; ?>"></script>
+		<?php endforeach; ?>
+	</head>
+	<body>
+		<!-- start content -->
+		<?php $this->load->view($content); ?>
+		<!-- end content -->
+		<style>
+			html { font-size: 100%; }
+			body { color: #333; min-width: 1080px; font: 300 100% 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+			div { display: block; }
+			ul, li { margin: 0; padding: 0; }
+			li { list-style: none; }
+			footer { font-size: .8125928571429em; }
+			a { text-decoration: none; color: #08C; }
+			a:hover { border-bottom: 1px dotted #08C; padding-bottom: .0625em;  }
+			abbr { cursor: help; font-size: 90%; text-transform:  uppercase; letter-spacing: .0625em; }
+			input { border: 1px solid #bbb; }
+			.clearfix { *zoom: 1; }
+			.clearfix:before, .clearfix:after { display: table; line-height: 0; content: ""; }
+			.clearfix:after { clear: both; }
+			.left { float: left; }
+			.right { float: right; }
+			.title { font-weight: 200; }
+			.menu-list { text-transform: uppercase; font-size: .7em; margin: 1em 0; }
+			.menu-list li { display: inline-block; margin-left: 1em; }
+			.text-left { text-align: left; }
+			.text-right { text-align: right; }
+			.text-center { text-align: center; }
+			.hide { width: 0; height:0; display: none; visibility: hidden; }
+			.form-inline { position: relative; font-size: .875em; }
+			.form-inline input[type=text], input[type="password"] { display: inline-block; margin: 0; vertical-align: middle; width: 7em; }
+			#auth_form { margin-top: -3em; }
+			#btnLogin { display: inline-block; }
+		</style>
+	</body>
+</html>

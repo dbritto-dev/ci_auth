@@ -1,0 +1,28 @@
+<?php $tables_auth = $this->db->list_tables(); ?>
+<div style="font-size: 87.5%;">
+	<div style="max-width: 50em; margin: 0 auto;">
+		<ul>
+		<?php foreach($tables_auth as $table_auth): ?>
+				<?php if($this->db->table_exists($table_auth)): ?>
+					<li>
+						<span style="font-weight: 700;"> <h3> <?php echo sprintf("Table %s", $table_auth); ?> </h3> </span>
+						<?php $fields = $this->db->field_data($table_auth); ?>
+						<dl>
+							<?php foreach($fields as $field): ?>
+							<dt> <span> <h4 style="color: #008b8b;"> <?php echo $field->name; ?> </h4> </span> </dt>
+							<dd>
+								<ul>
+									<li> <span style="color: #4682b4;">type:</span> <?php echo $field->type; ?> </li>
+									<li> <span style="color: #4682b4;">length:</span> <?php echo $field->max_length; ?> </li>
+								</ul>
+							</dd>
+							<?php endforeach; ?>
+						</dl>
+					</li>
+				<?php else: ?>
+					<li> <?php echo sprintf("This table %s not exist", $table_auth); ?> </li>
+				<?php endif; ?>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+</div>
