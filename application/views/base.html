@@ -4,8 +4,6 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>CI Auth - Admin Site</title>
-		<link rel="stylesheet" type="text/css" href="//necolas.github.com/normalize.css/2.1.0/normalize.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<?php foreach($css_files as $file): ?>
 			<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
 		<?php endforeach; ?>
@@ -14,9 +12,6 @@
 		<?php endforeach; ?>
 	</head>
 	<body>
-		<!-- start content -->
-		<?php $this->load->view($content); ?>
-		<!-- end content -->
 		<style>
 			html { font-size: 100%; }
 			body { color: #333; min-width: 1080px; font: 300 100% 'Helvetica Neue', Helvetica, Arial, sans-serif; }
@@ -25,7 +20,7 @@
 			li { list-style: none; }
 			footer { font-size: .8125928571429em; }
 			a { text-decoration: none; color: #08C; }
-			a:hover { border-bottom: 1px dotted #08C; padding-bottom: .0625em;  }
+			a:hover { border-bottom: 1px dotted #08C; padding-bottom: .0625em; text-decoration: none !important; }
 			abbr { cursor: help; font-size: 90%; text-transform:  uppercase; letter-spacing: .0625em; }
 			input { border: 1px solid #bbb; }
 			.clearfix { *zoom: 1; }
@@ -45,5 +40,8 @@
 			#auth_form { margin-top: -3em; }
 			#btnLogin { display: inline-block; }
 		</style>
+		<!-- start content -->
+		<?php $this->load->view($content); ?>
+		<!-- end content -->
 	</body>
 </html>

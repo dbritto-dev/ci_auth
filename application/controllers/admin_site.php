@@ -1,33 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
- */
-
-
 /* ==================================================================================================== */
 
 /**
- * admin_site Class
+ * Admin_site Class
  *
  * This class is a controller to authentication
  * Esta clase es una controlador para la autenticacion
  *
- * @package		CodeIgniter_Auth
+ * @package		CI_Auth
  * @subpackage	Contollers
  * @category	Controllers
  * @author		@danilobrinu
- * @link		https://bitbucket.org/danilobrinu/codeigniter_auth/wiki/Home
+ * @link		https://github.com/danilobrinu/ci_auth.git
  */
 class Admin_site extends CI_Controller {
 
@@ -46,27 +31,44 @@ class Admin_site extends CI_Controller {
 		 * Evita sobreescribir la herencia de CI_Controller
 		 */
 		parent::__construct();
+		/**
+		 * Loading js files to grocery_crud 
+		 * Cargando los archivos de javascript para grocery_crud
+		 */
+		$this->js_files = array();
+		/**
+		 * Load css files to grocery_crud 
+		 * Cargando los archivos de estilos para grocery_crud
+		 */
+		$this->css_files = array(
+			base_url().'assets/grocery_crud/css/normalize.css',
+			base_url().'assets/grocery_crud/themes/flexigrid/css/flexigrid.css'
+		);
 	}
 
 	function index()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$data['content'] = 'auth/index.html';
-		$data['js_files'] = array(
-			base_url().'/grocery_crud/themes/datatables/js/jquery-1.6.2.min.js',
-			base_url().'/grocery_crud/themes/datatables/js/cookies.js',
-			base_url().'/grocery_crud/themes/datatables/js/flexigrid.min.js',
-			base_url().'/grocery_crud/themes/datatables/js/jquery.form.js',
-			base_url().'/grocery_crud/themes/datatables/js/jquery.numeric.js'
-		);
-		$data['css_files'] = array(
-			'grocery_crud/themes/flexigrid/css/flexigrid.css'
-		);
+		$data['js_files'] = $this->js_files;
+		$data['css_files'] = $this->css_files;
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$this->load->view('base.html', $data);
 	}
 
 	function users()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_user');
 		$this->grocery_crud->required_fields('username', 'password', 'email');
@@ -75,6 +77,10 @@ class Admin_site extends CI_Controller {
 		$this->grocery_crud->callback_before_insert(array($this, 'encrypt_password'));
 		$this->grocery_crud->callback_before_update(array($this, 'encrypt_password'));
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
@@ -86,51 +92,91 @@ class Admin_site extends CI_Controller {
 
 	function groups()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_group');
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
 
 	function permissions()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_permission');
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
 
 	function users_groups()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_user_groups');
 		$this->grocery_crud->set_relation('user_id','auth_user','username');
 		$this->grocery_crud->set_relation('group_id','auth_group','name');
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
 
 	function groups_permissions()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_group_permissions');
 		$this->grocery_crud->set_relation('group_id','auth_group','name');
 		$this->grocery_crud->set_relation('permission_id','auth_permission','name');
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
 
 	function users_permissions()
 	{
+		/**
+		 * Config to load grocery_crud
+		 * Configuracion para cargar grocery_crud
+		 */
 		$this->load->library('login_required');
 		$this->grocery_crud->set_table('auth_user_user_permissions');
 		$this->grocery_crud->set_relation('user_id','auth_user','username');
 		$this->grocery_crud->set_relation('permission_id','auth_permission','name');
 		$data = $this->grocery_crud->render();
+		/**
+		 * Loading data
+		 * Cargando los datos
+		 */
 		$data->content = 'auth/crud.html';
 		$this->load->view('base.html', $data);
 	}
@@ -195,16 +241,8 @@ class Admin_site extends CI_Controller {
 			 * Loading view with config to view
 			 * Cargando la vista con la configuracion para la vista
 			 */
-			$data['js_files'] = array(
-				base_url().'/grocery_crud/themes/datatables/js/jquery-1.6.2.min.js',
-				base_url().'/grocery_crud/themes/datatables/js/cookies.js',
-				base_url().'/grocery_crud/themes/datatables/js/flexigrid.min.js',
-				base_url().'/grocery_crud/themes/datatables/js/jquery.form.js',
-				base_url().'/grocery_crud/themes/datatables/js/jquery.numeric.js'
-			);
-			$data['css_files'] = array(
-				'grocery_crud/themes/flexigrid/css/flexigrid.css'
-			);
+			$data['js_files'] = $this->js_files;
+			$data['css_files'] = $this->css_files;
 			$this->load->view('base.html', $data);
 		}
 	}
