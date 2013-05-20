@@ -176,21 +176,35 @@ class Auth {
 	 * @param	array
 	 * @param   string
 	 */
-	function login($request, $redirect_to = "main")
+	function login($request, $redirect_to = "admin_site")
 	{
-		$this->CI->db->where("username", $request["username"]);
-		$this->CI->db->limit(1);
-		$this->CI->db->update("auth_user", array("last_login" => date("Y-m-d h:i:s")));
+		/**
+		 * Update last login
+		 * Actualizar la ultima entrada
+		 */
+		$this->update_last_login($request['username']);
 		/**
 		 * Set userdata for session with $request and create
 		 * Establece o define userdata para la session y la crea
 		 */
 		$this->CI->session->set_userdata($request);
 		/**
-		 * Redirect to $redirect_to (default = "main")
-		 * redirecciona a $redirect_to (por defecto = "main")
+		 * Redirect to $redirect_to (default = "admin_site")
+		 * redirecciona a $redirect_to (por defecto = "admin_site")
 		 */
 		redirect($redirect_to, "refresh");
+	}
+
+
+	/**
+	 * Update last login
+	 * Actualizar la ultima entrada
+	 */
+	private function update_last_login($username)
+	{
+		$this->CI->db->where("username", $username);
+		$this->CI->db->limit(1);
+		$this->CI->db->update("auth_user", array("last_login" => date("Y-m-d h:i:s")));
 	}
 
 
@@ -211,8 +225,8 @@ class Auth {
 		 */
 		$this->CI->session->sess_destroy();
 		/**
-		 * Redirect to $redirect_to (default = "auth_users/login")
-		 * redirecciona a $redirect_to (por defecto = "auth_users/login")
+		 * Redirect to $redirect_to (default = "admin_site/login")
+		 * redirecciona a $redirect_to (por defecto = "admin_site/login")
 		 */
 		redirect($redirect_to, "refresh");
 	}

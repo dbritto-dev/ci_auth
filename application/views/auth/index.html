@@ -2,9 +2,39 @@
 	<?php include('header.html'); ?>
 	<section class="clearfix">
 		<div style="border-top: .0625em dotted #333; border-bottom: .0625em dotted #333;">
-				<?php include('menu-nav.html'); ?>
-				<h2>Yadda yadda</h2>
+			<?php include('menu-nav.html'); ?>
+			<div>
+				<h1>Home</h1>
+				<p>CI_Auth, is a set of libraries, that contains libraries for handling authentication, inspired by Django authentication. These libraries are Auth, Login_required, Permission_required, Group_required, Pass_test_required and Syncdb.</p>
+				<h2>Auth Library</h2>
+				<p>This library contains three methods, these methods are authentication, login and logout.</p>
+				<ul>
+					<li style="list-style: circle; margin-left: 2em;">The "authentication" method authenticates the user and returns an array of user data to be used in the session.</li>
+					<li style="list-style: circle; margin-left: 2em;">The "login" method creates a session with the data returned by the authentication method. Default redirects to main, but can configure.</li>
+					<li style="list-style: circle; margin-left: 2em;">The "logout" method destroy session created by the login method. Default redirects to **admin_site/login **, but can configure.</li>
+				</ul>
+				<h2>Login_required Library</h2>
+				<p>This library is used to restrict access to unauthenticated users, and the redirects to main. But, can configure. If used to restrict views, in where need authentication.</p>
+				<h2>Permission_required Library</h2>
+				<p>This library is used to restrict access to unauthorized users if have not permission or permissions. Contain two methods has_permission and has_permissions.</p>
+				<ul>
+					<li style="list-style: circle; margin-left: 2em;">The "has_permission", restricts access if you have not permission.</li>
+					<li style="list-style: circle; margin-left: 2em;">The "has_permissions", restricts access if you have not permissions, one and more permissions.</li>
+					<li style="list-style: circle; margin-left: 2em;">The two methods redirects to "main" if restriction is false, but can configure.</li>
+				</ul>
+				<h2>Group_required Library</h2>
+				<p>This library is used to restrict access to authorized users if have not group or groups. Contain two methods has_group and has_groups.</p>
+				<ul>
+					<li style="list-style: circle; margin-left: 2em;">The "has_group", restricts access if you have not group.</li>
+					<li style="list-style: circle; margin-left: 2em;">The "has_groups", restricts access if you have not groups, one and more groups.</li>
+					<li style="list-style: circle; margin-left: 2em;">The two methods redirects to main if restriction is false, but can configure.</li>
+				</ul>
+				<h2>Pass_test_required Library</h2>
+				<p>This library is used to restrict access to authorized users if not pass test with method test, redirects to main if restriction is false, but can configure.</p>
+				<h2>Syncdb Library</h2>
+				<p>This library contains methods to create the tables of authentication, used by the librerias of CI_Auth.</p>
 			</div>
+		</div>
 	</section>
 	<?php include('footer.html'); ?>
 </div>
