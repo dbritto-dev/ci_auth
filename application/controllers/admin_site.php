@@ -41,7 +41,6 @@ class Admin_site extends CI_Controller {
 		 * Cargando los archivos de estilos para grocery_crud
 		 */
 		$this->css_files = array(
-			base_url().'assets/grocery_crud/css/normalize.css',
 			base_url().'assets/grocery_crud/themes/flexigrid/css/flexigrid.css'
 		);
 	}

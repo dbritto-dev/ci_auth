@@ -52,7 +52,7 @@ class Main extends CI_Controller {
 	{
 		$data['content'] = 'main.html';
 		$data['js_files'] = array(
-			base_url().'/grocery_crud/themes/datatables/js/jquery-1.6.2.min.js',
+			base_url().'/grocery_crud/themes/datatables/js/jquery-1.8.2.min.js',
 			base_url().'/grocery_crud/themes/datatables/js/cookies.js',
 			base_url().'/grocery_crud/themes/datatables/js/flexigrid.min.js',
 			base_url().'/grocery_crud/themes/datatables/js/jquery.form.js',
