@@ -453,25 +453,20 @@ class Syncdb {
 		$permissions[] = array("name" => "Can change user", "codename" => "change_user");
 		$permissions[] = array("name" => "Can delete user", "codename" => "delete_user");
 
-		foreach ($permissions as $permission) {
-			$this->CI->db->insert("auth_permission", $permission);
-		}
+		$this->CI->db->insert_batch("auth_permission", $permissions);
 
 		$group_permissions = [];
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 1);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 2);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 3);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 4);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 5);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 6);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 7);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 8);
-		$group_permissions[] = array("group_id" => 1, "permision_id" => 9);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 1);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 2);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 3);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 4);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 5);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 6);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 7);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 8);
+		$group_permissions[] = array("group_id" => 1, "permission_id" => 9);
 
-		foreach ($group_permissions as $group_permission) {
-			$this->CI->db->insert("auth_group_permissions", $group_permission);
-		}
-
+		$this->CI->db->insert_batch("auth_group_permissions", $group_permissions);
 
 		$user_group = array("user_id" => 1, "group_id" => 1);
 		$this->CI->db->insert("auth_user_groups", $user_group);
@@ -488,9 +483,7 @@ class Syncdb {
 		$user_permissions[] = array("user_id" => 1, "permission_id" => 8);
 		$user_permissions[] = array("user_id" => 1, "permission_id" => 9);
 
-		foreach ($user_permissions as $user_permission) {
-			$this->CI->db->insert("auth_user_user_permissions", $user_permission);
-		}
+		$this->CI->db->insert_batch("auth_user_user_permissions", $user_permissions);
 	}
 
 }

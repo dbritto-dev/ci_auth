@@ -95,68 +95,44 @@ class Permission_required {
 		 */
 		$username = $this->CI->session->userdata("username");
 		/**
-		 * Initialize $user_id
-		 * Inicializando $user_id
+		 * Setting $user_id with $data
+		 * Definiendo $user_id con los valores de $data
 		 */
-		$user_id = "";
-
-		/**
-		 * Selecting fields of the table auth_user
-		 * Seleccionando los campos de la tabla auth_user
-		 */
-		$this->CI->db->select("id"); 
-		/**
-		 * Getting data of the table auth_user
-		 * Tomando los datos de la tabla de auth_user
-		 */
-		foreach ($this->CI->db->get_where("auth_user", array("username" => $username), 1, 0)->result() as $data) {
-			/**
-			 * Setting $user_id with $data
-			 * Definiendo $user_id con los valores de $data
-			 */
-			$user_id = $data->id;
-		}
-
+		$user_id = $this->CI->db->select("id")->from("auth_user")->where(array("username" => $username))->limit(1,0)->get()->result_array()[0]["id"];
 		/**
 		 * Initialize $user_permissions
 		 * Inicializando $user_permissions
 		 */
 		$user_permissions = array();
-
 		/**
 		 * Selecting fields of the table auth_user_user_permissions
 		 * Seleccionando los campos de la tabla auth_user_user_permissions
-		 */
-		$this->CI->db->select("permission_id");
-		/**
 		 * Getting data of the table auth_user_user_permissions
 		 * Tomando los datos de la tabla de auth_user_user_permissions
 		 */
-		foreach ($this->CI->db->get_where("auth_user_user_permissions", array("user_id" => $user_id))->result() as $data) {
+		$query_user_permissions = $this->CI->db->select("permission_id")->from("auth_user_user_permissions")->where(array("user_id" => $user_id))->get()->result_array();
+		foreach ($query_user_permissions as $data) {
 			/**
 			 * Setting $user_permissions with $data
 			 * Definiendo $user_permissions con los valores de $data
 			 */
-			$user_permissions[] = $data->permission_id;
+			$user_permissions[] = $data["permission_id"];
 		}
-
 		/**
-		 * Selecting fields of the table auth_user_user_permissions
-		 * Seleccionando los campos de la tabla auth_user_user_permissions
+		 * Setting $permission with $data
+		 * Definiendo $permission con los valores de $data
 		 */
-		$this->CI->db->select("id");
-		/**
-		 * Getting data of the table auth_user
-		 * Tomando los datos de la tabla de auth_user
-		 */
-		foreach ($this->CI->db->get_where("auth_permission", array("codename" => $permission))->result() as $data) {
-			/**
-			 * Setting $permission with $data
-			 * Definiendo $permission con los valores de $data
-			 */
-			$permission = $data->id;
+		$permission = $this->CI->db->select("id")->from("auth_permission")->where(array("codename" => $permission))->limit(1,0);
+	    $permission->ar_where = array("BINARY ".$permission->ar_where[0]); // hack to convert case sensitive query => add BINARY before fields
+		$permission = $permission->get()->result_array();
+		if(!empty($permission))
+		{
+			$permission = $permission[0]["id"];
 		}
-
+		else
+		{
+			$permission = NULL;
+		}
 		/**
 		 * Ask if $permission are not in $user_permissions
 		 * Pregunta si $permission no esta dentro de $user_permissions
@@ -190,34 +166,15 @@ class Permission_required {
 		 */
 		$username = $this->CI->session->userdata("username");
 		/**
-		 * Initialize $user_id
-		 * Inicializando $user_id
+		 * Setting $user_id with $data
+		 * Definiendo $user_id con los valores de $data
 		 */
-		$user_id = "";
-
-		/**
-		 * Selecting fields of the table auth_user
-		 * Seleccionando los campos de la tabla auth_user
-		 */
-		$this->CI->db->select("id"); 
-		/**
-		 * Getting data of the table auth_user
-		 * Tomando los datos de la tabla de auth_user
-		 */
-		foreach ($this->CI->db->get_where("auth_user", array("username" => $username), 1, 0)->result() as $data) {
-			/**
-			 * Setting $user_id with $data
-			 * Definiendo $user_id con los valores de $data
-			 */
-			$user_id = $data->id;
-		}
-
+		$user_id = $this->CI->db->select("id")->from("auth_user")->where(array("username" => $username))->limit(1,0)->get()->result_array()[0]["id"];
 		/**
 		 * Initialize $user_permissions
 		 * Inicializando $user_permissions
 		 */
 		$user_permissions = array();
-
 		/**
 		 * Selecting fields of the table auth_user_user_permissions
 		 * Seleccionando los campos de la tabla auth_user_user_permissions
@@ -234,31 +191,27 @@ class Permission_required {
 			 */
 			$user_permissions[] = $data->permission_id;
 		}
-
 		/**
 		 * Initialize $valid
 		 * Inicializando $valid
 		 */
 		$valid = TRUE;
-
 		foreach ($permissions as $permission) {
 			/**
-			 * Selecting fields of the table auth_user_user_permissions
-			 * Seleccionando los campos de la tabla auth_user_user_permissions
+			 * Setting $permission with $data
+			 * Definiendo $permission con los valores de $data
 			 */
-			$this->CI->db->select("id");
-			/**
-			 * Getting data of the auth_user_user_permissions
-			 * Tomando los datos de la auth_user_user_permissions
-			 */
-			foreach ($this->CI->db->get_where("auth_permission", array("codename" => $permission))->result() as $data) {
-				/**
-				 * Setting $permission with $data
-				 * Definiendo $permission con los valores de $data
-				 */
-				$permission = $data->id;
+			$permission = $this->CI->db->select("id")->from("auth_permission")->where(array("codename" => $permission))->limit(1,0);
+		    $permission->ar_where = array("BINARY ".$permission->ar_where[0]); // hack to convert case sensitive query => add BINARY before fields
+			$permission = $permission->get()->result_array();
+			if(!empty($permission))
+			{
+				$permission = $permission[0]["id"];
 			}
-
+			else
+			{
+				$permission = NULL;
+			}
 			/**
 			 * Ask if $permission are not in $user_permissions
 			 * Pregunta si $permission no esta dentro de $user_permissions
@@ -272,7 +225,6 @@ class Permission_required {
 				$valid = FALSE;
 			}
 		}
-
 		/**
 		 * Ask if $valid is false, if false redirect to $redirect_to
 		 * Pregunta si $valid es falso, si es falso redirecciona a $redirect_to

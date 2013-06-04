@@ -74,12 +74,12 @@ class Main extends CI_Controller {
 		 * Implements has_permission of permission_required to restriction access view if no have permission
 		 * Implementa has_permission de permission_required para restringir el acceso a la vista si no tiene permiso
 		 */
-		$this->permission_required->has_permission('add_user');
+		//$this->permission_required->has_permission('add_user');
 		/**
 		 * Implements has_permissions of permission_required to restriction access view if no have permission
 		 * Implementa has_permissions de permission_required para restringir el acceso a la vista si no tiene permisos
 		 */
-		//$this->permission_required->has_permissions(array('add_user', 'change_user'));
+		$this->permission_required->has_permissions(array('add_user', 'change_user'));
 		echo 'Hello world, site is site add user';
 	}
 
@@ -93,12 +93,12 @@ class Main extends CI_Controller {
 		 * Implements has_group of group_required to restriction access view if no have group
 		 * Implementa has_group de group_required para restringir el acceso a la vista si no tiene grupo
 		 */
-		$this->group_required->has_group('ADMIN');
+		//$this->group_required->has_group('admina');
 		/**
 		 * Implements has_groups of group_required to restriction access view if no have groups
 		 * Implementa has_groups de group_required para restringir el acceso a la vista si no tiene grupos
 		 */
-		//$this->group_required->has_groups(array('ADMIN', 'asda'));
+		$this->group_required->has_groups(array('admin'));
 		echo 'Hello world, site is site group admin';
 	}
 
