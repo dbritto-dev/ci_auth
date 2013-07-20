@@ -25,7 +25,7 @@ class Login_required {
 	 * @access public
 	 * @param  string
 	 */
-	function __construct($login_url = "admin_site/login")
+	function __construct($config = array("login_url" => "admin_site/login"))
 	{
 		/**
 		 * Getting instance of CodeIgniter necessary to load all files of the Core of CodeIgniter
@@ -65,7 +65,7 @@ class Login_required {
 			 * Redirect to $redirect_to (default = "auth_users/login") the unauthenticated user
 			 * redirecciona a $redirect_to (por defecto = "auth_users/login") al usuario no autenticado
 			 */
-			redirect($login_url, "refresh");
+			redirect($config['login_url'], "refresh");
 		}
 	}
 
