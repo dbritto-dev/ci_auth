@@ -8,7 +8,7 @@
  * This class restricts access to unauthenticated users
  * Esta clase restringe el acceso a los usuarios no autenticados
  *
- * @package		CodeIgniter_Auth
+ * @package		CI_Auth
  * @subpackage	Libraries
  * @category	Libraries
  * @author		@danilobrinu

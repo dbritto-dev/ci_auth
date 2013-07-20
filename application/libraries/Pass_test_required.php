@@ -8,7 +8,7 @@
  * This class restrict access if $function_test is false
  * Esta clase restringir el acceso si $ function_test es falsa
  *
- * @package		CodeIgniter_Auth
+ * @package		CI_Auth
  * @subpackage	Libraries
  * @category	Libraries
  * @author		@danilobrinu

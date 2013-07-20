@@ -11,7 +11,7 @@
  * Esta clase habilita funciones para manejar la autenticacion
  * Estas funciones son authenticate, login y logout.
  *
- * @package		CodeIgniter_Auth
+ * @package		CI_Auth
  * @subpackage	Libraries
  * @category	Libraries
  * @author		@danilobrinu
